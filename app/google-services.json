@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "180017682007",
+    "firebase_url": "https://giproject-a4f35.firebaseio.com",
+    "project_id": "giproject-a4f35",
+    "storage_bucket": "giproject-a4f35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:180017682007:android:ba6105a02f6cd7d641b512",
+        "android_client_info": {
+          "package_name": "com.cobanogluhasan.giproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "180017682007-em1230nb2dskgiie5qlikbuu618rjfmh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cobanogluhasan.giproject",
+            "certificate_hash": "f17ba9957ca6297d9354e164010f0e1f8afbe3ea"
+          }
+        },
+        {
+          "client_id": "180017682007-ckq19o4opldl4iutuekc57ml8sf4psnn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZO3FYn0D_c96vAtT6n7yqHqHmPY_wfGs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "180017682007-ckq19o4opldl4iutuekc57ml8sf4psnn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

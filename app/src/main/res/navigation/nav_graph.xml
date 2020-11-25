@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/loginRegisterFragment">
+
+    <fragment
+        android:id="@+id/loginRegisterFragment"
+        android:name="com.cobanogluhasan.giproject.views.LoginRegisterFragment"
+        android:label="LoginRegisterFragment" >
+        <action
+            android:id="@+id/action_loginRegisterFragment_to_viewSharePhotoFragment2"
+            app:destination="@id/viewSharePhotoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewSharePhotoFragment"
+        android:name="com.cobanogluhasan.giproject.views.ViewSharePhotoFragment"
+        android:label="ViewSharePhotoFragment" >
+        <action
+            android:id="@+id/action_viewSharePhotoFragment_to_loginRegisterFragment"
+            app:destination="@id/loginRegisterFragment" />
+        <action
+            android:id="@+id/action_viewSharePhotoFragment_to_uploadFragment"
+            app:destination="@id/uploadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/uploadFragment"
+        android:name="com.cobanogluhasan.giproject.views.UploadFragment"
+        android:label="UploadFragment" >
+        <action
+            android:id="@+id/action_uploadFragment_to_viewSharePhotoFragment"
+            app:destination="@id/viewSharePhotoFragment" />
+    </fragment>
+</navigation>
