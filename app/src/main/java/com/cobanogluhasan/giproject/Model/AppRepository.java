@@ -80,6 +80,8 @@ public class AppRepository {
         loggedOutMutableLiveData.postValue(true);
     }
 
+
+
     public MutableLiveData<Boolean> getLoggedOutMutableLiveData() {
         return loggedOutMutableLiveData;
     }
