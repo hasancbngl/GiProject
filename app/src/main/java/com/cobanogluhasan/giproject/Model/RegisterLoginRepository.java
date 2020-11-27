@@ -1,36 +1,26 @@
 package com.cobanogluhasan.giproject.Model;
 
 import android.app.Application;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.io.ByteArrayOutputStream;
-
-public class AppRepository {
+public class RegisterLoginRepository {
     private static final String TAG = "AppRepository";
     private Application application;
     private MutableLiveData<FirebaseUser> userMutableLiveData;
     private MutableLiveData<Boolean> loggedOutMutableLiveData;
     private FirebaseAuth mAuth;
 
-    public AppRepository(Application application) {
+    public RegisterLoginRepository(Application application) {
         this.application = application;
 
         userMutableLiveData = new MutableLiveData<>();

@@ -1,8 +1,6 @@
 package com.cobanogluhasan.giproject.Adapter;
 
-import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,29 +11,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.cobanogluhasan.giproject.models.UsersPictures;
 import com.cobanogluhasan.giproject.R;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final String TAG = "Adapter";
-    private ArrayList<String> mImageUrls = new ArrayList<>();
-    private ArrayList<String> mUserEmails = new ArrayList<>();
-    private ArrayList<String> mUserLocations = new ArrayList<>();
+    private List<UsersPictures> muserPictures;
 
     private Context mContext;
 
-    public Adapter(Context mContext,ArrayList<String> mImageUrls, ArrayList<String> mUserEmails, ArrayList<String> mUserLocations, Application application) {
-        this.mImageUrls = mImageUrls;
-        this.mUserEmails = mUserEmails;
-        this.mUserLocations = mUserLocations;
+    public Adapter(List<UsersPictures> muserPictures, Context mContext) {
+        this.muserPictures = muserPictures;
         this.mContext = mContext;
     }
-
 
     @NonNull
     @Override
@@ -45,25 +39,28 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         return viewHolder;
     }
 
-
-
-
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: called");
-        //get the images
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        //Set the email and location
+        ((ViewHolder)holder).email_user.setText(muserPictures.get(position).getUserEmail());
+        ((ViewHolder) holder).location_user.setText(muserPictures.get(position).getUserLocation());
+
+        //set the image
+        RequestOptions requestOptions = new RequestOptions()
+                .error(R.drawable.ic_launcher_background);
+
         Glide.with(mContext)
-                .load(mImageUrls)
-                .into(holder.imageView);
+                .setDefaultRequestOptions(requestOptions)
+                .load(muserPictures.get(position).getImageUrl())
+                .into(((ViewHolder) holder).imageView);
 
 
-        holder.location_user.setText(mUserLocations.get(position));
-        holder.email_user.setText(mUserEmails.get(position));
     }
+
 
     @Override
     public int getItemCount() {
-        return mImageUrls.size();
+        return muserPictures.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

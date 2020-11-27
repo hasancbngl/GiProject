@@ -20,6 +20,7 @@ import com.cobanogluhasan.giproject.R;
 import com.cobanogluhasan.giproject.ViewModel.LoginRegisterViewModel;
 import com.google.firebase.auth.FirebaseUser;
 
+@SuppressWarnings("ALL")
 public class LoginRegisterFragment extends Fragment {
 
     private static final String TAG = "LoginRegisterFragment";

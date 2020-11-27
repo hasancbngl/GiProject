@@ -114,6 +114,8 @@ public class UploadFragment extends Fragment {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                // ...
                 Toast.makeText(getContext(), "Yükleme Başarılı",Toast.LENGTH_SHORT).show();
 
                 Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();

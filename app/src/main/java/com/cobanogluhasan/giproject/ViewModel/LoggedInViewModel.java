@@ -4,34 +4,35 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.cobanogluhasan.giproject.Model.AppRepository;
+import com.cobanogluhasan.giproject.Model.RegisterLoginRepository;
 import com.google.firebase.auth.FirebaseUser;
 
 
 public class LoggedInViewModel extends AndroidViewModel {
-    private AppRepository appRepository;
+    private RegisterLoginRepository registerLoginRepository;
     private MutableLiveData<FirebaseUser> userMutableLiveData;
     private MutableLiveData<Boolean> loggedOutMutableLiveData;
 
     public LoggedInViewModel(@NonNull Application application) {
         super(application);
 
-        appRepository = new AppRepository(application);
-        userMutableLiveData = appRepository.getUserMutableLiveData();
-        loggedOutMutableLiveData = appRepository.getLoggedOutMutableLiveData();
+        registerLoginRepository = new RegisterLoginRepository(application);
+        userMutableLiveData = registerLoginRepository.getUserMutableLiveData();
+        loggedOutMutableLiveData = registerLoginRepository.getLoggedOutMutableLiveData();
     }
 
     public void signOut() {
-        appRepository.signOut();
+        registerLoginRepository.signOut();
     }
 
-    public MutableLiveData<FirebaseUser> getUserMutableLiveData() {
+    public LiveData<FirebaseUser> getUserMutableLiveData() {
         return userMutableLiveData;
     }
 
-    public MutableLiveData<Boolean> getLoggedOutMutableLiveData() {
+    public LiveData<Boolean> getLoggedOutMutableLiveData() {
         return loggedOutMutableLiveData;
     }
 
