@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.cobanogluhasan.giproject.Model.RegisterLoginRepository;
+import com.cobanogluhasan.giproject.Repository.RegisterLoginRepository;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginRegisterViewModel extends AndroidViewModel {

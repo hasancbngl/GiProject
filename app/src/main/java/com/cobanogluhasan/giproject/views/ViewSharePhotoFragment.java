@@ -1,6 +1,8 @@
 package com.cobanogluhasan.giproject.views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +34,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 @SuppressWarnings("ALL")
@@ -48,6 +51,8 @@ public class ViewSharePhotoFragment extends Fragment {
     private Adapter mAdapter;
     private Context mContext;
     private RecyclerView recyclerView;
+    private String imageName;
+    private byte[] data;
 
 
     @Override
@@ -84,7 +89,6 @@ public class ViewSharePhotoFragment extends Fragment {
         });
 
 
-
     }
 
 
@@ -103,6 +107,9 @@ public class ViewSharePhotoFragment extends Fragment {
         signOutButton = view.findViewById(R.id.signOutButton);
         addnewImageButton = view.findViewById(R.id.addnewImageButton);
         recyclerView = view.findViewById(R.id.recycler_view);
+
+        signOutButton.setText("Log Out");
+        addnewTextview.setText("Add a pic");
 
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override

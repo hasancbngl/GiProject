@@ -1,4 +1,4 @@
-package com.cobanogluhasan.giproject.Model;
+package com.cobanogluhasan.giproject.Repository;
 
 import android.app.Application;
 import android.util.Log;

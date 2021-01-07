@@ -102,55 +102,10 @@ public class UploadFragment extends Fragment {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
-        final UploadTask uploadTask =  FirebaseStorage.getInstance().getReference().child("images").child(imageName).putBytes(data);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-                Toast.makeText(getContext(), "Yükleme başarısız!!", Toast.LENGTH_SHORT).show();
 
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
-                Toast.makeText(getContext(), "Yükleme Başarılı",Toast.LENGTH_SHORT).show();
-
-                Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
-                while ((!uri.isComplete()));
-                Uri url = uri.getResult();
-
-                String fileLink = url.toString();
-
-                updataData(fileLink);
-
-            }
-        });
-    }
-    private void updataData(String url){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("users");
-
-      /*  reference.child("users").child(Objects.requireNonNull(Objects.requireNonNull(task.getResult())
-                .getUser()).getUid()).child("email").setValue(email); */
-      String email = mAuth.getCurrentUser().getEmail();
-
-      reference.child(mAuth.getCurrentUser().getUid()).child("email").setValue(email);
-      reference.child(mAuth.getCurrentUser().getUid()).child("location").setValue(address);
-
-      try {
-          reference.child(mAuth.getCurrentUser().getUid()).child("url").setValue(url);
-          throw new Exception();
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
-
-        Navigation.findNavController(getView()).navigate(R.id.action_uploadFragment_to_viewSharePhotoFragment);
+        //call upload Image metod
 
     }
-
 
 
     private void getPhoto() {

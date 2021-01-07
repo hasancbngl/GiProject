@@ -61,6 +61,9 @@ public class LoginRegisterFragment extends Fragment {
         signupButton = view.findViewById(R.id.signUpButton);
         loginButton = view.findViewById(R.id.loginButton);
 
+        signupButton.setText("Sign Up");
+        loginButton.setText("Log in");
+
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
