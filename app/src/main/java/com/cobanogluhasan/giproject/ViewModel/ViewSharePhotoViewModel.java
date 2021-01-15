@@ -30,7 +30,4 @@ public class ViewSharePhotoViewModel extends ViewModel {
         return mUserPictures;
     }
 
-    public void uploadImage(String imageName, byte[] data, final Context context) {
-        usersPicturesRepository.uploadImage(imageName, data, context);
-    }
 }

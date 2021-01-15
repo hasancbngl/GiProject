@@ -23,7 +23,6 @@ public class LoginRegisterViewModel extends AndroidViewModel {
     }
 
     public void register(String email, String password) {
-        //invoke the register method on apprepo class
 
         registerLoginRepository.register(email, password);
     }

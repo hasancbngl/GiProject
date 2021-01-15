@@ -1,24 +1,46 @@
 package com.cobanogluhasan.giproject.Repository;
 
+import android.app.Application;
 import android.content.Context;
 import android.net.Uri;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.Navigation;
 
 import com.cobanogluhasan.giproject.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
 public class UploadPicturesRepository {
-    public void uploadImage(String imageName, byte[] data, final Context context, final View view) {
+    private static final String TAG = "UploadPicturesRepository";
+    private FirebaseAuth mAuth;
+    private MutableLiveData<FirebaseUser> userMutableLiveData;
+    private Application application;
+
+    public UploadPicturesRepository(Application application) {
+        this.application = application;
+        userMutableLiveData = new MutableLiveData<>();
+        mAuth = FirebaseAuth.getInstance();
+
+        if(mAuth.getCurrentUser()!=null) {
+            userMutableLiveData.postValue(mAuth.getCurrentUser());
+        }
+
+    }
+
+
+
+    public void uploadImage(String imageName, byte[] data, final Context context, final View view, final String adress) {
 
         //private ImageView imageView;
 
@@ -51,13 +73,13 @@ public class UploadPicturesRepository {
 
                 String fileLink = url.toString();
 
-                 updataData(fileLink,view);
+                 updataData(fileLink,view,adress);
 
             }
         });
     }
 
-    private void updataData(String url, View view,){
+    private void updataData(String url, View view,String address){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("users");
 
@@ -74,7 +96,10 @@ public class UploadPicturesRepository {
         }
 
         Navigation.findNavController(view).navigate(R.id.action_uploadFragment_to_viewSharePhotoFragment);
+    }
 
+    public MutableLiveData<FirebaseUser> getUserMutableLiveData() {
+        return userMutableLiveData;
     }
 
 

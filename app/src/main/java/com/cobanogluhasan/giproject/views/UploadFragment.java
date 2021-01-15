@@ -28,19 +28,22 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
 import com.cobanogluhasan.giproject.R;
+import com.cobanogluhasan.giproject.ViewModel.UploadViewModel;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.UploadTask;
+import com.google.firebase.auth.FirebaseUser;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 
 import java.io.ByteArrayOutputStream;
@@ -53,6 +56,7 @@ import java.util.concurrent.Executor;
 
 import static android.app.Activity.RESULT_OK;
 
+@SuppressWarnings("ALL")
 public class UploadFragment extends Fragment {
     private static final String TAG = "UploadFragment";
     private ImageView imageView;
@@ -61,16 +65,25 @@ public class UploadFragment extends Fragment {
     private FusedLocationProviderClient fusedLocationProviderClient;
     private String imageName = UUID.randomUUID().toString() + ".jpg";
     private String address="";
-    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+    private UploadViewModel uploadViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
-
-        mAuth = FirebaseAuth.getInstance();
-
+        user = FirebaseAuth.getInstance().getCurrentUser();
         getPermission();
+
+        uploadViewModel = ViewModelProviders.of(this).get(UploadViewModel.class);
+
+        uploadViewModel.getUserMutableLiveData().observe(this, new Observer<FirebaseUser>() {
+            @Override
+            public void onChanged(FirebaseUser firebaseUser) {
+                user = firebaseUser;
+            }
+        });
+
     }
 
     @Nullable
@@ -102,9 +115,8 @@ public class UploadFragment extends Fragment {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
-
-        //call upload Image metod
-
+        if(!address.equals(""))  uploadViewModel.uploadImage(imageName, data, getContext(),imageView,address);
+        else getLocation();
     }
 
 
